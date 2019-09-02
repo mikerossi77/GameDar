@@ -15,5 +15,13 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
 
+    Courts.associate = function(models) {
+      // Associating Court with courtStatus
+      // When an Court is deleted, also delete any associated courtStatus
+      Courts.hasMany(models.courtStatus, {
+        onDelete: "cascade"
+      });
+    };
+
     return Courts;
   };

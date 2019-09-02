@@ -12,6 +12,7 @@
 * Get Courts
 * Operation should be GET
 * URL:  localhost:8080/api/courts
+* Press "Send"
 * Response should be:  []    *Because there are no courts yet.  All data will be wiped out everytime you restart the server
 * 
 * Create Court
@@ -25,7 +26,8 @@
 *     "courtName": "Oso Grande Elementary",
 *     "description": "2 full courts with 8 foot rims"
 * }
-* This should create a new court.  Respons should be:
+* Press "Send"
+* This should create a new court.  Response should be:
 * {
 *     "id": 1,
 *     "courtName": "Oso Grande Elementary",
@@ -37,6 +39,7 @@
 * Get Courts
 * Operation should be GET
 * URL:  localhost:8080/api/courts
+* Press Send
 * Response should be:
 * [
 *     {

@@ -37,8 +37,11 @@ app.set("view engine", "handlebars");
 // require("./routes/html-routes.js")(app);
 // require("./routes/author-api-routes.js")(app);
 // require("./routes/post-api-routes.js")(app);
+require("./routes/html-routes.js")(app);
 require("./routes/courts.js")(app);
 require("./routes/courtStatus.js")(app);
+require("./routes/users.js")(app);
+require("./routes/sports.js")(app);
 
 var syncOptions = { force: false };
 

@@ -6,6 +6,8 @@
 // =============================================================
 var express = require("express");
 
+var exphbs = require("express-handlebars");
+
 // Sets up the Express App
 // =============================================================
 var app = express();
@@ -21,6 +23,15 @@ app.use(express.json());
 // Static directory
 app.use(express.static("public"));
 
+// Handlebars
+app.engine(
+  "handlebars",
+  exphbs({
+    defaultLayout: "main"
+  })
+);
+app.set("view engine", "handlebars");
+
 // Routes
 // =============================================================
 // require("./routes/html-routes.js")(app);
@@ -28,6 +39,14 @@ app.use(express.static("public"));
 // require("./routes/post-api-routes.js")(app);
 require("./routes/courts.js")(app);
 require("./routes/courtStatus.js")(app);
+
+var syncOptions = { force: false };
+
+// If running a test, set syncOptions.force to true
+// clearing the `testdb`
+if (process.env.NODE_ENV === "test") {
+  syncOptions.force = true;
+}
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================

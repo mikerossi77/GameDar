@@ -18,5 +18,18 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/createCourt', function (req, res) {
+    res.render('createCourt');
+  });
+
+  app.get('/createUser', function (req, res) {
+    res.render('createUser');
+  });
+
+  app.get('/login', function (req, res) {
+    res.render('index');
+  });
+
+
 
 };

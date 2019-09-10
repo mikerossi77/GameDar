@@ -1,0 +1,96 @@
+<div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#"><img class="logo" src="https://i.ibb.co/JvVMnVS/tracking.png" alt="">GameDar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a id="homeLink" class="nav-link" href="./login.html">Home<span class="sr-only"></span></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container courtOptions">
+            <div>
+                <div id="iconContainer">
+                    <img class="icons" src="https://i.ibb.co/sj2Rx5S/multiple-users-silhouette.png" alt="">
+
+                </div>
+                <h3 id="createUserTitle">Create Account</h3>
+            </div>
+
+        </div>
+
+        <form>
+            <div class="form-group">
+                <label class="label" for="exampleFormControlInput1">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Username</label>
+                <input type="text" class="form-control" id="username">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect2">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="example@gmail.com">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Phone Number</label>
+                <input type="text" class="form-control" id="phone">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Height</label>
+                <input type="text" class="form-control" id="height">
+            </div>
+            <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Skill Level</label>
+                    <select class="form-control" id="skill">
+                            <option>Beginner</option>
+                            <option>Intermediate </option>
+                            <option>Advanced</option>
+                          </select>
+                </div>
+                <button id="submitBtn" type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal">Submit</button>
+        </form>
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">New Account</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      Your account has been created!
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+    </div>
+
+    <script>
+    
+    $("#submitBtn").click(function(){
+        var newUser = {
+            name: $("#name").val(),
+            username: $("#username").val(),
+            email: $("#email").val(),
+            phone: $("#phone").val(),
+            height: $("#height").val(),
+            Level: $("#skill").val()
+        }
+        console.log(newUser)
+    })
+    
+    
+    </script>

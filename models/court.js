@@ -19,7 +19,7 @@ module.exports = function(sequelize, DataTypes) {
       numHalfCourts: {type: DataTypes.TEXT},
       isPrivate: {type: DataTypes.BOOLEAN},
       isIndoor: {type: DataTypes.BOOLEAN},
-      logitude: {type: DataTypes.DECIMAL},
+      longitude: {type: DataTypes.DECIMAL},
       latitude: {type: DataTypes.DECIMAL},
     });
 

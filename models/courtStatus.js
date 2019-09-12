@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      lookingForMorePlayers: {type: DataTypes.BOOLEAN}
+      lookingForMorePlayers: {type: DataTypes.TEXT}
     });
   
     CourtStatus.associate = function(models) {
@@ -20,15 +20,15 @@ module.exports = function(sequelize, DataTypes) {
         }
       });
     };
-    CourtStatus.associate = function(models) {
-        // We're saying that a courtStatus should belong to a Court
-        // A courtStatus can't be created without a Court due to the foreign key constraint
-        CourtStatus.belongsTo(models.Users, {
-          foreignKey: {
-            allowNull: false
-          }
-        });
-      };
+    // CourtStatus.associate = function(models) {
+    //     // We're saying that a courtStatus should belong to a Court
+    //     // A courtStatus can't be created without a Court due to the foreign key constraint
+    //     CourtStatus.belongsTo(models.Users, {
+    //       foreignKey: {
+    //         allowNull: false
+    //       }
+    //     });
+    //   };
     return CourtStatus;
   };
 

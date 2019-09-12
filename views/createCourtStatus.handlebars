@@ -34,53 +34,32 @@
                 <img class="icons" src="https://i.ibb.co/fFPWVwV/basketball2.png" alt="">
 
             </div>
-            <h2 id="createCourtStatusTitle">Post Create Status</h2>
+            <h2 id="createCourtStatusTitle">Post Court Status</h2>
         </div>
 
     </div>
     <div class="container formContainer">
         <form id="form">
             <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="courtStatusComments">What's Going on?</label>
-                    <input type="text" class="form-control" id="courtStatusComments">
-                </div>
-                <div class="form-group col-md-6">
+                   <div class="form-group col-md-6">
                     <label for="inputNumOfPlayers">Number Of Players There</label>
                     <input type="number" class="form-control" id="numOfPlayers">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="courtStatusComments">What's Going on?</label>
-                <input type="text" class="form-control" id="courtStatusComments">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address Of Court</label>
-                <input type="text" class="form-control" id="Address" placeholder="1234 Main St">
-            </div>
-            <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="City">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <input type="text" class="form-control" id="State">
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="Zip">
+                    <label for="inputMorePlayersWanted">Looking For More Players?</label>
+                <select class="form-control" id="lookingForMorePlayers">
+                    <option id="yes">Yes</option>
+                    <option id="no">No</option>
+                </select>
                 </div>
             </div>
-
-            <button type="button" class="btn btn-primary getAddress">Use Current Location</button>
             <div class="form-group">
-                <label for="exampleFormControlTextarea1">Description</label>
-                <textarea class="form-control" id="description" rows="3"></textarea>
+                <label for="inputComments">Tell Everyone What's Up</label>
+                <input type="text" class="form-control" id="comments" placeholder="Got a game going">
             </div>
 
             <button type="submit" class="btn btn-primary submitBtn" data-toggle="modal"
-                data-target="#exampleModal">Create Court</button>
+                data-target="#exampleModal">Post Court Status</button>
         </form>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -88,13 +67,13 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Created Court</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Post Created</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        Your court has been created!
+                        Your court status has been posted!
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -112,57 +91,30 @@
 
 
     $(".submitBtn").click(function () {
+        console.log("HELLO!");
         event.preventDefault();
-        var court = {
-            courtName: $("#courtName").val(),
+        var courtStatus = {
+            comments: $("#comments").val(),
             //numOfPlayers: $("#numOfPlayers").val(),
             sport: $("#sport").val(),
-            address1: $("#Address").val(),
-            city: $("#City").val(),
-            state: $("#State").val(),
-            zip: $("#Zip").val(),
-            description: $("#description").val()
+            numOfPlayers: $("#numOfPlayers").val(),
+            lookingForMorePlayers: $("#lookingForMorePlayers").val(),
+            //UserId: 1
         }
-        console.log(court)
+        console.log(courtStatus)
         // Send the POST request.
-        $.ajax("/api/courts", {
+        $.ajax("/api/courtStatus", {
             type: "POST",
-            data: court
+            data: courtStatus
         }).then(
             function () {
-                console.log("created new court");
+                console.log("created new court status");
                 // Reload the page to get the updated list
                 //location.reload();
             }
         );
 
     })
-
-
-    $(".getAddress").click(function () {
-
-
-        x = navigator.geolocation;
-
-        x.getCurrentPosition(success);
-
-        function success(position) {
-            var coordinates = {
-                Latitude: position.coords.latitude,
-                Longitude: position.coords.longitude
-            }
-            console.log(coordinates);
-        }
-
-
-
-
-    })
-
-
-
-
-
 
 
 </script>

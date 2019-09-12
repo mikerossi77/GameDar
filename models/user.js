@@ -1,7 +1,7 @@
 module.exports = function(sequelize, DataTypes) {
     var Users = sequelize.define("Users", {
       // Giving the Court model a name, address, and number of courts
-      username: {
+      userName: {
         type: DataTypes.STRING,
         allowNull: false
       },

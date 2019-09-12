@@ -26,13 +26,18 @@ app.get('/createUser', function (req, res) {
   res.render('createUser');
 });
 
+app.get('/createCourtStatus', function (req, res) {
+  res.render('createCourtStatus');
+});
+
 app.get('/viewCourts', function (req, res) {
   res.render('viewCourts');
 });
 
 
+
   // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
-    res.render("404");
-  });
+  // app.get("*", function(req, res) {
+  //   res.render("404");
+  // });
 };

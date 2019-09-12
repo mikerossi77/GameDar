@@ -1,13 +1,17 @@
 module.exports = function(sequelize, DataTypes) {
     var Users = sequelize.define("Users", {
       // Giving the Court model a name, address, and number of courts
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
       email: {
         type: DataTypes.STRING,
         allowNull: false
       },
       password: {
         type: DataTypes.STRING,
-        allowNull: false
+        allowNull: true
       },
       name: {
         type: DataTypes.STRING,
@@ -15,7 +19,8 @@ module.exports = function(sequelize, DataTypes) {
       },
       phone: {type: DataTypes.TEXT},
       height: {type: DataTypes.TEXT},
-      position: {type: DataTypes.TEXT}
+      position: {type: DataTypes.TEXT},
+      level: {type: DataTypes.TEXT},
     });
 
     Users.associate = function(models) {

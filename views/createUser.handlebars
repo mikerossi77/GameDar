@@ -87,9 +87,17 @@
             email: $("#email").val(),
             phone: $("#phone").val(),
             height: $("#height").val(),
-            Level: $("#skill").val()
+            level: $("#skill").val()
         }
         console.log(newUser)
+        $.ajax("/api/users", {
+            type: "POST",
+            data: newUser
+        }).then(
+            function () {
+                console.log("created new user");
+            }
+        );
     })
     
     

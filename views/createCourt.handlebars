@@ -1,151 +1,165 @@
 <div class="container">
 
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#"><img class="logo" src="https://i.ibb.co/JvVMnVS/tracking.png" alt="">GameDar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#"><img class="logo" src="https://i.ibb.co/JvVMnVS/tracking.png"
+                alt="">GameDar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="./viewCourts.html">View Courts<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./createCout.html">Create New Court</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Log Out</a>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
 
-        <div class="container courtOptions">
-            <div>
-                <div id="iconContainer">
-                    <img class="icons" src="https://i.ibb.co/fFPWVwV/basketball2.png" alt="">
+                <li class="nav-item">
+                    <a class="nav-link" href="./viewCourts.html">View Courts<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./createCourt.html">Create New Court</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Log Out</a>
+                </li>
 
-                </div>
-                <h2 id="createCourtTitle">Create Court</h2>
-            </div>
-
+            </ul>
         </div>
-        <div class="container formContainer">
-            <form id="form">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputEmail4">Name of Court</label>
-                        <input type="text" class="form-control" id="courtName">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">Number Of Desired Players</label>
-                        <input type="number" class="form-control" id="numOfPlayers">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="exampleFormControlSelect1">Type of Sport</label>
-                    <select class="form-control" id="sport">
-                        <option id="basketball">Basketball</option>
-                        <option id="baseball">Baseball</option>
-                        <option id="soccer">Soccer</option>
-                        <option id="football">Football</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                        <label for="inputAddress">Address Of Court</label>
-                        <input type="text" class="form-control" id="Address" placeholder="1234 Main St">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="City">
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label for="inputState">State</label>
-                            <input type="text" class="form-control" id="State">
-                        </div>
-                        <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="Zip">
-                        </div>
-                    </div>
-    
-                <button type="button" class="btn btn-primary getAddress">Use Current Location</button>
-                <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Description</label>
-                    <textarea class="form-control" id="description" rows="3"></textarea>
-                </div>
-            
-                <button type="submit" class="btn btn-primary submitBtn" data-toggle="modal" data-target="#exampleModal">Create Court</button>
-            </form>
+    </nav>
 
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Created Court</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">
-                          Your court has been created!
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+    <div class="container courtOptions">
+        <div>
+            <div id="iconContainer">
+                <img class="icons" src="https://i.ibb.co/fFPWVwV/basketball2.png" alt="">
 
+            </div>
+            <h2 id="createCourtTitle">Create Court</h2>
         </div>
-
-
 
     </div>
-    <script>
+    <div class="container formContainer">
+        <form id="form">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Name of Court</label>
+                    <input type="text" class="form-control" id="courtName">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Number Of Desired Players</label>
+                    <input type="number" class="form-control" id="numOfPlayers">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Type of Sport</label>
+                <select class="form-control" id="sport">
+                    <option id="basketball">Basketball</option>
+                    <option id="baseball">Baseball</option>
+                    <option id="soccer">Soccer</option>
+                    <option id="football">Football</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress">Address Of Court</label>
+                <input type="text" class="form-control" id="Address" placeholder="1234 Main St">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="City">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputState">State</label>
+                    <input type="text" class="form-control" id="State">
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="Zip">
+                </div>
+            </div>
+
+            <button type="button" class="btn btn-primary getAddress">Use Current Location</button>
+            <div class="form-group">
+                <label for="exampleFormControlTextarea1">Description</label>
+                <textarea class="form-control" id="description" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary submitBtn" data-toggle="modal"
+                data-target="#exampleModal">Create Court</button>
+        </form>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Created Court</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Your court has been created!
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 
 
-        $(".submitBtn").click(function () {
-            event.preventDefault();
-            var court = {
-                CourtName: $("#courtName").val(),
-                numOfPlayers: $("#numOfPlayers").val(),
-                Sport: $("#sport").val(),
-                Address: $("#Address").val(),
-                City: $("#City").val(),
-                State: $("#State").val(),
-                Zip: $("#Zip").val(),
-                Description: $("#description").val()
+
+</div>
+<script>
+
+
+    $(".submitBtn").click(function () {
+        event.preventDefault();
+        var court = {
+            courtName: $("#courtName").val(),
+            //numOfPlayers: $("#numOfPlayers").val(),
+            sport: $("#sport").val(),
+            address1: $("#Address").val(),
+            city: $("#City").val(),
+            state: $("#State").val(),
+            zip: $("#Zip").val(),
+            description: $("#description").val()
+        }
+        console.log(court)
+        // Send the POST request.
+        $.ajax("/api/courts", {
+            type: "POST",
+            data: court
+        }).then(
+            function () {
+                console.log("created new court");
+                // Reload the page to get the updated list
+                //location.reload();
             }
-            console.log(court)
+        );
 
-        })
-
-
-        $(".getAddress").click(function () {
+    })
 
 
-            x = navigator.geolocation;
+    $(".getAddress").click(function () {
 
-            x.getCurrentPosition(success);
 
-            function success(position) {
-                var coordinates = {
-                    Latitude: position.coords.latitude,
-                    Longitude: position.coords.longitude
-                }
-                console.log(coordinates);
+        x = navigator.geolocation;
+
+        x.getCurrentPosition(success);
+
+        function success(position) {
+            var coordinates = {
+                Latitude: position.coords.latitude,
+                Longitude: position.coords.longitude
             }
+            console.log(coordinates);
+        }
 
 
 
 
-        })
+    })
 
 
 
@@ -153,4 +167,4 @@
 
 
 
-    </script>
+</script>

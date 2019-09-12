@@ -9,6 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         }
       },
       description: {type: DataTypes.TEXT},
+      sport: {type: DataTypes.TEXT},
       address1: {type: DataTypes.TEXT},
       address2: {type: DataTypes.TEXT},
       city: {type: DataTypes.TEXT},
@@ -27,15 +28,15 @@ module.exports = function(sequelize, DataTypes) {
         onDelete: "cascade"
       });
     };
-    Courts.associate = function(models) {
-      // Associating Court with courtStatus
-      // When an Court is deleted, also delete any associated courtStatus
-      Courts.belongsTo(models.Sports, {
-        foreignKey: {
-          allowNull: false
-        }
-      });
-    };
+    // Courts.associate = function(models) {
+    //   // Associating Court with courtStatus
+    //   // When an Court is deleted, also delete any associated courtStatus
+    //   Courts.belongsTo(models.Sports, {
+    //     foreignKey: {
+    //       allowNull: true
+    //     }
+    //   });
+    // };
 
     return Courts;
   };

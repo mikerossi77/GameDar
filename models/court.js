@@ -18,7 +18,9 @@ module.exports = function(sequelize, DataTypes) {
       numFullCourts: {type: DataTypes.INTEGER},
       numHalfCourts: {type: DataTypes.TEXT},
       isPrivate: {type: DataTypes.BOOLEAN},
-      isIndoor: {type: DataTypes.BOOLEAN}
+      isIndoor: {type: DataTypes.BOOLEAN},
+      longitude: {type: DataTypes.DECIMAL},
+      latitude: {type: DataTypes.DECIMAL},
     });
 
     Courts.associate = function(models) {

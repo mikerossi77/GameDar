@@ -114,48 +114,44 @@
 
 
     $(".submitBtn").click(function () {
-        event.preventDefault();
-        var court = {
-            courtName: $("#courtName").val(),
-            //numOfPlayers: $("#numOfPlayers").val(),
-            sport: $("#sport").val(),
-            address1: $("#Address").val(),
-            city: $("#City").val(),
-            state: $("#State").val(),
-            zip: $("#Zip").val(),
-            description: $("#description").val()
-        }
-        console.log(court)
-        // Send the POST request.
-        $.ajax("/api/courts", {
-            type: "POST",
-            data: court
-        }).then(
-            function () {
-                console.log("created new court");
-                // Reload the page to get the updated list
-                //location.reload();
-            }
-        );
+       event.preventDefault();
+       x = navigator.geolocation;
+
+       x.getCurrentPosition(function (position) {
+           var coordinates = {
+               Latitude: position.coords.latitude,
+               Longitude: position.coords.longitude
+           }
+           var court = {
+               courtName: $("#courtName").val(),
+               //numOfPlayers: $("#numOfPlayers").val(),
+               sport: $("#sport").val(),
+               address1: $("#Address").val(),
+               city: $("#City").val(),
+               state: $("#State").val(),
+               zip: $("#Zip").val(),
+               description: $("#description").val(),
+               lat: coordinates.Latitude,
+               long: coordinates.Longitude
+           }
+           console.log(court)
+           // Send the POST request.
+           $.ajax("/api/courts", {
+               type: "POST",
+               data: court
+           }).then(
+               function () {
+                   console.log("created new court");
+                   // Reload the page to get the updated list
+                   //location.reload();
+               }
+           );
+       });
 
     })
 
 
     $(".getAddress").click(function () {
-
-
-        x = navigator.geolocation;
-
-        x.getCurrentPosition(success);
-
-        function success(position) {
-            var coordinates = {
-                Latitude: position.coords.latitude,
-                Longitude: position.coords.longitude
-            }
-            console.log(coordinates);
-        }
-
 
 
 

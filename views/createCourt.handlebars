@@ -118,6 +118,15 @@
 
     $(".submitBtn").click(function () {
         event.preventDefault();
+        x = navigator.geolocation;
+
+        x.getCurrentPosition(success);
+
+        function success(position) {
+            var coordinates = {
+                Latitude: position.coords.latitude,
+                Longitude: position.coords.longitude
+            }
         var court = {
             courtName: $("#courtName").val(),
             //numOfPlayers: $("#numOfPlayers").val(),
@@ -141,23 +150,15 @@
             }
         );
 
+    });
+
     })
 
 
     $(".getAddress").click(function () {
 
 
-        x = navigator.geolocation;
-
-        x.getCurrentPosition(success);
-
-        function success(position) {
-            var coordinates = {
-                Latitude: position.coords.latitude,
-                Longitude: position.coords.longitude
-            }
-            console.log(coordinates);
-        }
+        
 
 
 

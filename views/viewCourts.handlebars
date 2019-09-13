@@ -1,37 +1,32 @@
-
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#"><img class="logo" src="https://i.ibb.co/JvVMnVS/tracking.png" alt="">GameDar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <a class="navbar-brand" href="#"><img class="logo" src="https://i.ibb.co/JvVMnVS/tracking.png"
+                alt="">GameDar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    
-                    <li class="nav-item">
-                        <a class="nav-link" href="./viewCourts.html">View Courts<span class="sr-only"></span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="./createCout.html">Create New Court</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Log Out</a>
-                    </li>
-                
-                </ul>
-            </div>
-        </nav>
-        <div class="container mapimgContainer">
-            <div id="mapimg">
-            <img src="https://i.ibb.co/VjZDSd3/map-1.png" alt="">
-            </div>
-            <div>
-                <button onclick="initMap()" type="button" class="btn btn-primary btn-lg">Find Courts Near You</button>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="./viewCourts">View Courts<span class="sr-only"></span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./createCourt">Create New Court</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./createCourtStatus">Post Court Status</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Log Out</a>
+                </li>
+
+            </ul>
         </div>
-    
+    </nav>
+    <button onclick="initMap()">Find Courts Near You</button>
     <div class="container" id="map"></div>
     <script>
 
@@ -47,115 +42,106 @@
                     lat: position.coords.latitude,
                     lng: position.coords.longitude
                 }
-            console.log(coordinates);
+                console.log(coordinates);
 
-            
 
-            var uluru = coordinates;
-            map = new google.maps.Map(
-                document.getElementById('map'),
-                // we want to center on the user's location ***
-                { center: new google.maps.LatLng(uluru), zoom: 12 });
 
-            var icons = {
-                basketball: {
-                    icon: 'https://i.ibb.co/9yZW56v/basketball-1-1.png'
-                },
-                soccer: {
-                    icon: 'https://i.ibb.co/f2C1mtp/football-ball-1.png'
-                },
-                baseball: {
-                    icon: 'https://i.ibb.co/Rgy0bRb/baseball-1.png'
-                }
-            };
+                var uluru = coordinates;
+                map = new google.maps.Map(
+                    document.getElementById('map'),
+                    // we want to center on the user's location ***
+                    { center: new google.maps.LatLng(uluru), zoom: 12 });
 
-            // we need a for loop here to make an array of objects to show the courts within a certain amount radius around the user. ***
-            var features = [
-                {
-                    position: new google.maps.LatLng(33.6638, -117.9047),
-                    type: 'basketball'
-                }, {
-                    position: new google.maps.LatLng(33.7743, -117.9380),
-                    type: 'soccer'
-                }, {
-                    position: new google.maps.LatLng(34.0522, -118.2437),
-                    type: 'baseball'
-                }, {
-                    position: new google.maps.LatLng(33.7455, -117.8677),
-                    type: 'baseball'
-                }, {
-                    position: new google.maps.LatLng(33.6846, -117.8265),
-                    type: 'basketball'
-                }, {
-                    position: new google.maps.LatLng(33.919543720969806, -151.23112279762267),
-                    type: 'basketball'
-                }, {
-                    position: new google.maps.LatLng(33.91608037421864, -151.23288232673644),
-                    type: 'soccer'
-                }, {
-                    position: new google.maps.LatLng(33.91851096391805, -151.2344058214569),
-                    type: 'soccer'
-                }, {
-                    position: new google.maps.LatLng(33.91818154739766, -151.2346203981781),
-                    type: 'baseball'
-                }, {
-                    position: new google.maps.LatLng(33.91727341958453, -151.23348314155578),
-                    type: 'basketball'
-                }
-            ];
+                var icons = {
+                    Basketball: {
+                        icon: 'https://i.ibb.co/9yZW56v/basketball-1-1.png'
+                    },
+                    Soccer: {
+                        icon: 'https://i.ibb.co/f2C1mtp/football-ball-1.png'
+                    },
+                    Baseball: {
+                        icon: 'https://i.ibb.co/Rgy0bRb/baseball-1.png'
+                    }
+                };
 
-            // Create markers.
-            for (var i = 0; i < features.length; i++) {
-                var marker = new google.maps.Marker({
-                    position: features[i].position,
-                    icon: icons[features[i].type].icon,
-                    map: map
+                var features = [];
+
+                (function () {
+                    var courtsAPI = "/api/courts";
+                    $.getJSON(courtsAPI)
+                        .done(function (data) {
+                            //console.log(data);
+                            var i;
+                            for (i = 0; i < data.length; i++) {
+                                console.log(data[i]);
+                                features.push(
+                                    "position: new google.maps.LatLng(" + data[i].latitude + ", " + data[i].longitude + "), type: '" + data[i].sport + "'"
+                                )
+                            }
+                            console.log(features);
+                            //$.each(data.items, function (i, item) {
+                            //  console.log(data.items[i]);
+                            //console.log("Holy shit it worked!");
+                            //});
+                        });
+                })();
+
+
+
+
+                // we need a for loop here to make an array of objects to show the courts within a certain amount radius around the user. ***
+
+                // Create markers.
+                for (var i = 0; i < features.length; i++) {
+                    var marker = new google.maps.Marker({
+                        position: features[i].position,
+                        icon: icons[features[i].type].icon,
+                        map: map
+                    });
+                };
+
+                // function initMap() {
+                // var uluru = {lat: -25.363, lng: 131.044};
+                // var map = new google.maps.Map(document.getElementById('map'), {
+                //   zoom: 4,
+                //   center: uluru
+                // });
+
+
+                //needs to be dynamically generated to show court's info.***
+                var contentString = '<div id="content">' +
+                    '<div id="siteNotice">' +
+                    '</div>' +
+                    '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+                    '<div id="bodyContent">' +
+                    '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                    'sandstone rock formation in the southern part of the ' +
+                    'Heritage Site.</p>' +
+                    '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+                    'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
+                    '(last visited June 22, 2009).</p>' +
+                    '</div>' +
+                    '</div>';
+
+                var infowindow = new google.maps.InfoWindow({
+                    maxWidth: 320,
+                    content: contentString
                 });
-            };
 
-            // function initMap() {
-            // var uluru = {lat: -25.363, lng: 131.044};
-            // var map = new google.maps.Map(document.getElementById('map'), {
-            //   zoom: 4,
-            //   center: uluru
-            // });
+                var marker = new google.maps.Marker({
+                    position: uluru,
+                    map: map,
+                    //title to be name of court.***
+                    title: 'Uluru (Ayers Rock)'
+                });
+                marker.addListener('click', function () {
+                    infowindow.open(map, marker);
+                });
+            }
 
-
-            //needs to be dynamically generated to show court's info.***
-            var contentString = '<div id="content">' +
-                '<div id="siteNotice">' +
-                '</div>' +
-                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
-                '<div id="bodyContent">' +
-                '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                'sandstone rock formation in the southern part of the ' +
-                'Heritage Site.</p>' +
-                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-                'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
-                '(last visited June 22, 2009).</p>' +
-                '</div>' +
-                '</div>';
-
-            var infowindow = new google.maps.InfoWindow({
-                maxWidth: 320,
-                content: contentString
-            });
-
-            var marker = new google.maps.Marker({
-                position: uluru,
-                map: map,
-                //title to be name of court.***
-                title: 'Uluru (Ayers Rock)'
-            });
-            marker.addListener('click', function () {
-                infowindow.open(map, marker);
-            });
-        }
-        
         }
 
     </script>
-    <script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa7_fZwPyu9CJQEKSeoGQlPtRxIKoRKXg">
-        </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa7_fZwPyu9CJQEKSeoGQlPtRxIKoRKXg">
+    </script>
 </div>

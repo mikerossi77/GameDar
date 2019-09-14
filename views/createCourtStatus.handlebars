@@ -52,6 +52,14 @@
                     <option id="no">No</option>
                 </select>
                 </div>
+                <select class="form-control" id="courtName">
+                    <option value="1">UC Irvine Aardvark Dorm</option>
+                    <option value="2">West Irvine High School</option>
+                    <option value="3">Newport Community Center</option>
+                    <option value="4">Costa Mesa Elementary</option>
+                    <option value="5">Santa Ana Middle School</option>
+
+                </select>
             </div>
             <div class="form-group">
                 <label for="inputComments">Tell Everyone What's Up</label>
@@ -99,6 +107,7 @@
             sport: $("#sport").val(),
             numOfPlayers: $("#numOfPlayers").val(),
             lookingForMorePlayers: $("#lookingForMorePlayers").val(),
+            CourtId: $("#courtName").val()
             //UserId: 1
         }
         console.log(courtStatus)

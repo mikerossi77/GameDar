@@ -77,21 +77,47 @@
                             var i;
                             for (i = 0; i < data.length; i++) {
                                 console.log(data[i]);
+                                var courtsAPI = "/api/courts";
+
                                 myLatitude = Number(data[i].lat);
                                 myLongitude = Number(data[i].long);
-                                features.push(
-                                    {
-                                        position: new google.maps.LatLng(myLatitude, myLongitude),
-                                        type: data[i].sport
-                                    }
-                                )
+
+
+                                if (data[i].courtStatuses === undefined || data[i].courtStatuses.length == 0) {
+                                    // array empty or does not exist
+                                    console.log("THIS IS I:" + i);
+                                    features.push(
+                                        {
+                                            position: new google.maps.LatLng(myLatitude, myLongitude),
+                                            type: data[i].sport,
+                                            courtName: data[i].courtName,
+                                            description: data[i].description,
+                                            numOfPlayers: "",
+                                            lookingForMorePlayers: "",
+                                            comments: "No status for this court yet"
+                                        }
+                                    )
+                                }
+                                else {
+                                    features.push(
+                                        {
+                                            position: new google.maps.LatLng(myLatitude, myLongitude),
+                                            type: data[i].sport,
+                                            courtName: data[i].courtName,
+                                            description: data[i].description,
+                                            numOfPlayers: data[i].courtStatuses[0].numOfPlayers,
+                                            lookingForMorePlayers: data[i].courtStatuses[0].lookingForMorePlayers,
+                                            comments: data[i].courtStatuses[0].comments
+                                        }
+                                    )
+                                }
                             }
-                            console.log(features);
+
                             //$.each(data.items, function (i, item) {
                             //  console.log(data.items[i]);
                             //console.log("Holy shit it worked!");
                             //});
-                            console.log("Made it to Create Markers");
+                           
 
 
 
@@ -108,7 +134,17 @@
                                     }),
                                     iw: new google.maps.InfoWindow({
                                         maxWidth: 320,
-                                        content: "This is court: " + i
+                                        content: '<div id="content">' +
+                                            '<div id="siteNotice">' +
+                                            '</div>' +
+                                            '<h1 id="firstHeading" class="firstHeading">' + features[i].courtName + '</h1>' +
+                                            '<div id="bodyContent">' +
+                                            '<p><b>' + features[i].description + '</b>' +
+                                            '<p><b>' + features[i].comments + '</b>' +
+                                            '<p><b>Number of Players: ' + features[i].numOfPlayers + '</b>' +
+                                            '<p><b>Looking for more players: ' + features[i].lookingForMorePlayers + '</b>' +
+                                            '</div>' +
+                                            '</div>'
                                     })
                                 })
                             }
@@ -117,49 +153,49 @@
                                     marker.iw.open(map, marker.m)
                                 })
                             })
-                       
-
-                    // function initMap() {
-                    // var uluru = {lat: -25.363, lng: 131.044};
-                    // var map = new google.maps.Map(document.getElementById('map'), {
-                    //   zoom: 4,
-                    //   center: uluru
-                    // });
 
 
-                    //needs to be dynamically generated to show court's info.***
-                    var contentString = '<div id="content">' +
-                        '<div id="siteNotice">' +
-                        '</div>' +
-                        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
-                        '<div id="bodyContent">' +
-                        '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                        'sandstone rock formation in the southern part of the ' +
-                        'Heritage Site.</p>' +
-                        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-                        'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
-                        '(last visited June 22, 2009).</p>' +
-                        '</div>' +
-                        '</div>';
+                            // function initMap() {
+                            // var uluru = {lat: -25.363, lng: 131.044};
+                            // var map = new google.maps.Map(document.getElementById('map'), {
+                            //   zoom: 4,
+                            //   center: uluru
+                            // });
 
-                    var infowindow = new google.maps.InfoWindow({
-                        maxWidth: 320,
-                        content: contentString
-                    });
 
-                    var marker = new google.maps.Marker({
-                        position: uluru,
-                        map: map,
-                        //title to be name of court.***
-                        title: 'Uluru (Ayers Rock)'
-                    });
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
-                });
-            }) ();
+                            //needs to be dynamically generated to show court's info.***
+                            var contentString = '<div id="content">' +
+                                '<div id="siteNotice">' +
+                                '</div>' +
+                                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+                                '<div id="bodyContent">' +
+                                '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                                'sandstone rock formation in the southern part of the ' +
+                                'Heritage Site.</p>' +
+                                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+                                'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
+                                '(last visited June 22, 2009).</p>' +
+                                '</div>' +
+                                '</div>';
 
-        }
+                            var infowindow = new google.maps.InfoWindow({
+                                maxWidth: 320,
+                                content: contentString
+                            });
+
+                            var marker = new google.maps.Marker({
+                                position: uluru,
+                                map: map,
+                                //title to be name of court.***
+                                title: 'Uluru (Ayers Rock)'
+                            });
+                            marker.addListener('click', function () {
+                                infowindow.open(map, marker);
+                            });
+                        });
+                })();
+
+            }
 
         }
 

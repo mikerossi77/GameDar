@@ -121,10 +121,18 @@
        x = navigator.geolocation;
 
        x.getCurrentPosition(function (position) {
+           var longDelta = Math.random() * .05; 
+           var latDelta = Math.random() * .05;
+           //longDelta = longDelta - .05;
+           //latDelta = latDelta - .05;
+        console.log("longDelta: " + longDelta);
+        console.log("longDelta: " + latDelta);
            var coordinates = {
-               Latitude: position.coords.latitude,
-               Longitude: position.coords.longitude
+               Latitude: position.coords.latitude - latDelta,
+               Longitude: position.coords.longitude - longDelta
            }
+           console.log("latitude: " + coordinates.Latitude);
+           console.log("longitured: " + coordinates.Longitude);
            var court = {
                courtName: $("#courtName").val(),
                //numOfPlayers: $("#numOfPlayers").val(),
@@ -153,7 +161,7 @@
 
     });
 
-    })
+    
 
 
     $(".getAddress").click(function () {

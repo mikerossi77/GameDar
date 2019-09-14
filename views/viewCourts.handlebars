@@ -77,23 +77,47 @@
                             var i;
                             for (i = 0; i < data.length; i++) {
                                 console.log(data[i]);
+                                var courtsAPI = "/api/courts";
+
                                 myLatitude = Number(data[i].lat);
                                 myLongitude = Number(data[i].long);
-                                features.push(
-                                    {
-                                        position: new google.maps.LatLng(myLatitude, myLongitude),
-                                        type: data[i].sport,
-                                        courtName: data[i].courtName,
-                                        description: data[i].description
-                                    }
-                                )
+
+
+                                if (data[i].courtStatuses === undefined || data[i].courtStatuses.length == 0) {
+                                    // array empty or does not exist
+                                    console.log("THIS IS I:" + i);
+                                    features.push(
+                                        {
+                                            position: new google.maps.LatLng(myLatitude, myLongitude),
+                                            type: data[i].sport,
+                                            courtName: data[i].courtName,
+                                            description: data[i].description,
+                                            numOfPlayers: "",
+                                            lookingForMorePlayers: "",
+                                            comments: "No status for this court yet"
+                                        }
+                                    )
+                                }
+                                else {
+                                    features.push(
+                                        {
+                                            position: new google.maps.LatLng(myLatitude, myLongitude),
+                                            type: data[i].sport,
+                                            courtName: data[i].courtName,
+                                            description: data[i].description,
+                                            numOfPlayers: data[i].courtStatuses[0].numOfPlayers,
+                                            lookingForMorePlayers: data[i].courtStatuses[0].lookingForMorePlayers,
+                                            comments: data[i].courtStatuses[0].comments
+                                        }
+                                    )
+                                }
                             }
-                            console.log(features);
+
                             //$.each(data.items, function (i, item) {
                             //  console.log(data.items[i]);
                             //console.log("Holy shit it worked!");
                             //});
-                            console.log("Made it to Create Markers");
+                           
 
 
 
@@ -116,6 +140,9 @@
                                             '<h1 id="firstHeading" class="firstHeading">' + features[i].courtName + '</h1>' +
                                             '<div id="bodyContent">' +
                                             '<p><b>' + features[i].description + '</b>' +
+                                            '<p><b>' + features[i].comments + '</b>' +
+                                            '<p><b>Number of Players: ' + features[i].numOfPlayers + '</b>' +
+                                            '<p><b>Looking for more players: ' + features[i].lookingForMorePlayers + '</b>' +
                                             '</div>' +
                                             '</div>'
                                     })

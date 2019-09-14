@@ -1,5 +1,5 @@
 <div class="container">
-   <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <a class="navbar-brand" href="#"><img class="logo" src="https://i.ibb.co/JvVMnVS/tracking.png"
                 alt="">GameDar</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -108,15 +108,18 @@
             height: $("#height").val(),
             level: $("#skill").val()
         }
+
         console.log(newUser)
-        $.ajax("/api/users", {
+        $.ajax("/auth/register", {
             type: "POST",
             data: newUser
         }).then(
             function () {
-                console.log("created new user");
+                window.location.assign("./")
             }
-        );
+        ).fail(function (err) {
+            console.log(err)
+        })
     })
 
 

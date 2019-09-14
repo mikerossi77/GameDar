@@ -4,14 +4,19 @@
 // ******************************************************************************
 // *** Dependencies
 // =============================================================
+require('dotenv').config();
 var express = require("express");
-
+var jwt = require('express-jwt');
+var authRoutes = require('./routes/authentication/authentication.routes');
 var exphbs = require("express-handlebars");
 
 // Sets up the Express App
 // =============================================================
 var app = express();
 var PORT = process.env.PORT || 8080;
+var auth = jwt({
+  secret: process.env.JWT_SECRET
+})
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -37,6 +42,8 @@ app.set("view engine", "handlebars");
 // require("./routes/html-routes.js")(app);
 // require("./routes/author-api-routes.js")(app);
 // require("./routes/post-api-routes.js")(app);
+app.use('/auth', authRoutes);
+app.use(auth);
 require("./routes/html-routes.js")(app);
 require("./routes/courts.js")(app);
 require("./routes/courtStatus.js")(app);
@@ -53,8 +60,8 @@ if (process.env.NODE_ENV === "test") {
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function() {
-  app.listen(PORT, function() {
+db.sequelize.sync({ force: true }).then(function () {
+  app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });
 });

@@ -56,11 +56,19 @@
 
     $(".btn-lg").click(function () {
         var credentials = {
-            Username: $("#username").val(),
-            Password: $("#password").val()
+            username: $("#username").val().trim(),
+            password: $("#password").val().trim()
         }
-
-        console.log(credentials)
+        
+        $.ajax('/auth/login', {
+            type: "POST",
+            data: credentials
+        }).then(function(resp) {
+            localStorage.setItem('token', resp.data.token)
+            window.location.assign('./viewCourts');
+        }).fail(function(err){
+            console.log(err);
+        })
 
     })
 

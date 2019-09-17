@@ -60,15 +60,15 @@
             password: $("#password").val().trim()
         }
         
-        $.ajax('/auth/login', {
-            type: "POST",
-            data: credentials
-        }).then(function(resp) {
-            localStorage.setItem('token', resp.data.token)
-            window.location.assign('./viewCourts');
-        }).fail(function(err){
+        axios.post('/auth/login', credentials).
+        then(function(resp){
+            localStorage.setItem('token', resp.token)
+            window.location.assign('./viewCourts')
+        }).catch(function(err){
             console.log(err);
         })
+
+        
 
     })
 

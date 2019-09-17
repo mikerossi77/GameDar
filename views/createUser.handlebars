@@ -101,7 +101,7 @@
     $("#submitBtn").click(function () {
         var newUser = {
             name: $("#name").val(),
-            userName: $("#username").val(),
+            username: $("#username").val(),
             password: $("#password").val(),
             email: $("#email").val(),
             phone: $("#phone").val(),
@@ -109,17 +109,26 @@
             level: $("#skill").val()
         }
 
+        axios.post('/auth/register', newUser)
+            .then(
+                function () {
+                    window.location.assign('./')
+                }
+            ).catch(function (err) {
+                console.log(err)
+            })
+
         console.log(newUser)
-        $.ajax("/auth/register", {
-            type: "POST",
-            data: newUser
-        }).then(
-            function () {
-                window.location.assign("./")
-            }
-        ).fail(function (err) {
-            console.log(err)
-        })
+        //$.ajax("/auth/register", {
+          //  type: "POST",
+            //data: newUser
+        //}).then(
+          //  function () {
+            //    window.location.assign(__dirname, "/");
+            //}
+        //).fail(function (err) {
+          //  console.log(err)
+        //})
     })
 
 

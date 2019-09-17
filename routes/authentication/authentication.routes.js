@@ -7,7 +7,7 @@ router.post('/login', function (req, res) {
     var user = _.pick(req.body, ['username', 'password'])
     Auth.login(user)
         .then(function (token) {
-            res.json({ token })
+            res.json({ token });
         })
         .catch(function (err) {
             console.log(err)

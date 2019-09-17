@@ -20,7 +20,7 @@
                     <a class="nav-link" href="./createCourtStatus">Post Court Status</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Log Out</a>
+                    <a class="nav-link" id="log-out" href="/">Log Out</a>
                 </li>
 
             </ul>
@@ -117,51 +117,54 @@
                                     marker.iw.open(map, marker.m)
                                 })
                             })
-                       
-
-                    // function initMap() {
-                    // var uluru = {lat: -25.363, lng: 131.044};
-                    // var map = new google.maps.Map(document.getElementById('map'), {
-                    //   zoom: 4,
-                    //   center: uluru
-                    // });
 
 
-                    //needs to be dynamically generated to show court's info.***
-                    var contentString = '<div id="content">' +
-                        '<div id="siteNotice">' +
-                        '</div>' +
-                        '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
-                        '<div id="bodyContent">' +
-                        '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-                        'sandstone rock formation in the southern part of the ' +
-                        'Heritage Site.</p>' +
-                        '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
-                        'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
-                        '(last visited June 22, 2009).</p>' +
-                        '</div>' +
-                        '</div>';
+                            // function initMap() {
+                            // var uluru = {lat: -25.363, lng: 131.044};
+                            // var map = new google.maps.Map(document.getElementById('map'), {
+                            //   zoom: 4,
+                            //   center: uluru
+                            // });
 
-                    var infowindow = new google.maps.InfoWindow({
-                        maxWidth: 320,
-                        content: contentString
-                    });
 
-                    var marker = new google.maps.Marker({
-                        position: uluru,
-                        map: map,
-                        //title to be name of court.***
-                        title: 'Uluru (Ayers Rock)'
-                    });
-                    marker.addListener('click', function () {
-                        infowindow.open(map, marker);
-                    });
-                });
-            }) ();
+                            //needs to be dynamically generated to show court's info.***
+                            var contentString = '<div id="content">' +
+                                '<div id="siteNotice">' +
+                                '</div>' +
+                                '<h1 id="firstHeading" class="firstHeading">Uluru</h1>' +
+                                '<div id="bodyContent">' +
+                                '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
+                                'sandstone rock formation in the southern part of the ' +
+                                'Heritage Site.</p>' +
+                                '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">' +
+                                'https://en.wikipedia.org/w/index.php?title=Uluru</a> ' +
+                                '(last visited June 22, 2009).</p>' +
+                                '</div>' +
+                                '</div>';
+
+                            var infowindow = new google.maps.InfoWindow({
+                                maxWidth: 320,
+                                content: contentString
+                            });
+
+                            var marker = new google.maps.Marker({
+                                position: uluru,
+                                map: map,
+                                //title to be name of court.***
+                                title: 'Uluru (Ayers Rock)'
+                            });
+                            marker.addListener('click', function () {
+                                infowindow.open(map, marker);
+                            });
+                        });
+                })();
+
+            }
 
         }
-
-        }
+        $('#log-out').on('click', function () {
+            authHelper.logOut('./index.html')
+        })
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAa7_fZwPyu9CJQEKSeoGQlPtRxIKoRKXg">

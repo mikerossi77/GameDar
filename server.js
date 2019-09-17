@@ -43,8 +43,8 @@ app.set("view engine", "handlebars");
 // require("./routes/author-api-routes.js")(app);
 // require("./routes/post-api-routes.js")(app);
 app.use('/auth', authRoutes);
-app.use(auth);
 require("./routes/html-routes.js")(app);
+app.use(auth);
 require("./routes/courts.js")(app);
 require("./routes/courtStatus.js")(app);
 require("./routes/users.js")(app);
@@ -60,7 +60,7 @@ if (process.env.NODE_ENV === "test") {
 
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
-db.sequelize.sync({ force: true }).then(function () {
+db.sequelize.sync({ force: process.env.NODE_ENV === 'development' }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);
   });

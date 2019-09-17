@@ -21,7 +21,7 @@
                     <a class="nav-link" href="./createCourtStatus">Post Court Status</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Log Out</a>
+                    <a class="nav-link" id="log-out" href="/">Log Out</a>
                 </li>
 
             </ul>
@@ -41,16 +41,16 @@
     <div class="container formContainer">
         <form id="form">
             <div class="form-row">
-                   <div class="form-group col-md-6">
+                <div class="form-group col-md-6">
                     <label for="inputNumOfPlayers">Number Of Players There</label>
                     <input type="number" class="form-control" id="numOfPlayers">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="inputMorePlayersWanted">Looking For More Players?</label>
-                <select class="form-control" id="lookingForMorePlayers">
-                    <option id="yes">Yes</option>
-                    <option id="no">No</option>
-                </select>
+                    <select class="form-control" id="lookingForMorePlayers">
+                        <option id="yes">Yes</option>
+                        <option id="no">No</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">
@@ -58,8 +58,8 @@
                 <input type="text" class="form-control" id="comments" placeholder="Got a game going">
             </div>
 
-            <button type="submit" class="btn btn-primary submitBtn" data-toggle="modal"
-                data-target="#exampleModal">Post Court Status</button>
+            <button type="submit" class="btn btn-primary submitBtn" data-toggle="modal" data-target="#exampleModal">Post
+                Court Status</button>
         </form>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -87,8 +87,43 @@
 
 
 </div>
-<script>
+<script type="text/javascript">
 
+    var myAxios = axios.create({
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+    });
+    myAxios.interceptors.response.use(function (response) {
+        return response;
+    }, function (error) {
+        if (error.response.status === 401) {
+            return authHelper.logOut('http://localhost:8080/')
+        }
+        else {
+            return Promise.reject(error)
+        }
+    })
+    var authHelper = {
+        isLoggedIn() {
+            var token = localStorage.getItem('token')
+            if (token) {
+                var userData = this.parseToken(token);
+                var expirationDate = new Date(userData.exp * 1000)
+                if (Date.now() > expirationDate) this.logOut()
+            } else {
+                alert('not logged in')
+                window.location.assign('http://localhost:8080/')
+            }
+        },
+        parseToken(token) {
+            return JSON.parse(window.atob(token.split('.')[1]))
+        },
+        logOut(path = 'http://localhost:8080/') {
+            localStorage.removeItem('token')
+            window.location.assign(path)
+        }
+    }
 
     $(".submitBtn").click(function () {
         console.log("HELLO!");
@@ -114,6 +149,10 @@
             }
         );
 
+    })
+
+    $('#log-out').on('click', function () {
+        authHelper.logOut('./index.html')
     })
 
 
